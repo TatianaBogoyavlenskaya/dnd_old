@@ -16,9 +16,13 @@
         Пароль
         <input type="password" name="password"><br>
     </label>
-    <a href="registr.php">Зарегистрироваться</a>
+    <a href="user/registr.php">Зарегистрироваться</a>
     <input type="submit" value="Войти">
 </form>   
 </body>
 </html>
-<?php include_once "autorizationAnalysis.php";?>
+<?php 
+    session_start();
+    include_once "workWithDB.php";
+    include_once "user/autorizationAnalysis.php";
+?>

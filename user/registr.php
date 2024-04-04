@@ -24,7 +24,7 @@
             Повторите пароль*
             <input type="password" name="passwordDouble"><br>
         </label>
-        <a href="index.php">Авторизоваться</a><br>
+        <a href="../index.php">Авторизоваться</a><br>
         <input type="submit" value="Зарегистрироваться">
     </form>
 </body>

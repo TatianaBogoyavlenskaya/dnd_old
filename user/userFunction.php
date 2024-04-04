@@ -1,6 +1,4 @@
 <?php 
-    include_once "workWithDB.php";
-
     //Регистрация пользователя
     function AddUser($login,$name,$password)
     {      
@@ -23,15 +21,15 @@
 
     //Авторизация пользователя
     function Autorization($login,$password)
-    {
+    {        
         $select = "SELECT * FROM user WHERE (login = ? AND password = ?)";
         $result = Select($select, "ss", $login,$password);     
         if ($result->num_rows == 1) :
-            header("Location: updateFormPers.php");
             $_SESSION["login"] = $login;
+            echo "<script> localStorage.setItem('login', '$login');</script>";
+            header("Location: pers/pers.php");
             return;
         endif;
         echo "<p>Ошибка при входе. Проверьте введенные данные</p>";
-        return;
     }
 ?>

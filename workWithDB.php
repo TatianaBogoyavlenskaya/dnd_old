@@ -5,7 +5,6 @@
     $GLOBALS["passwordDB"] = "";
     $GLOBALS["db"] = "dnd";
     $GLOBALS["connect"] = new mysqli($GLOBALS["hostname"],$GLOBALS["username"],$GLOBALS["passwordDB"],$GLOBALS["db"] = "dnd");
-    session_start();
 
     //Отправка запроса на выбор
     function Select($select, $type = null, ...$value)
