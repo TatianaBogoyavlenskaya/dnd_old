@@ -1,6 +1,6 @@
 <pre>
 <?php 
-    if (!isset($_POST["name"]) || !isset($_POST["level"]) || $_POST["name"] == "" ):
+    if (!isset($_POST["name"]) || !isset($_POST["level"]) ):
         echo "Не все обязательные поля заполнены";
         return;
     endif;

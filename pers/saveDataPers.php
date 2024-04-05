@@ -9,6 +9,5 @@
     var_dump($_POST);
     if($result) :
          header("Location: pers.php");
-         echo "<p>Сохранения изменены</p>";
     endif;
 ?>

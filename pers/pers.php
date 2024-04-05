@@ -13,11 +13,14 @@
         include_once "../workWithDB.php";
         include_once "persFunction.php";
         include_once "formPers.php";
+        if (!isset($_SESSION["login"])):
+            return null;
+        endif;
         $result = GetPers();
-        GetRuss();
-        GetClass();
+        GetSelects();
         if ($result != null):
             GetDataPers($result);
+            GetCharacteristics();
         endif;
     ?>
     <script language="JavaScript" src="../js/dataPers.js"></script>
