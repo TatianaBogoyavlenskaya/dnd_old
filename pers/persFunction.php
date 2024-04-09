@@ -115,7 +115,8 @@
     //Сохранение данных о персонаже в localStorage
     function SetDataPersInScript($value)
     {
-        $arrType = ["namePers", "level", "passive_attention","bonus", "initiative", "class_armor", "speed", "health_max", "health_current", "health_bones","tests_death", "experience"];
+        $arrType = ["namePers", "level", "passive_attention","bonus", "initiative", "class_armor", "speed", "health_max", "health_current", "health_bones","tests_death", 
+        "experience", "inspiration"];
         for ($index = 0; $index < count($arrType); $index++):        
             SetInLocalStorage($arrType[$index], $value[$arrType[$index]]);
         endfor;

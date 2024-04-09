@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>О персонаже</title>
     <script language="JavaScript" src="../js/functionPers.js"></script>
+    <link rel="stylesheet" href="../css/styleListPers.css">
 </head>
 <body>
     <?php        

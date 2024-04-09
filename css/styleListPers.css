@@ -1,0 +1,189 @@
+/* label {
+    font-size: 14px;
+    height: max-content;
+}
+
+div {
+    margin: 2px;
+    padding: 2px;
+}
+
+/* input {
+    height: 15px;
+} */
+
+/* select {
+    height: 20px;
+}
+
+.selectPers {
+    width: 100%;
+}
+
+.name {
+    height: 60px;
+    width: 49%;
+    float: left;
+}
+
+.generalInfoRow1,
+.generalInfoRow2 {
+    width: 49%;
+    height: 30px;
+    float: left;
+}
+
+.generalInfoElement {
+    width: 20%;
+}
+
+input .generalInfoElement,
+.characteristicsElement,
+.spasbrosokElement,
+.skillsElement {
+    height: 15px;
+}
+
+.namePers {
+    width: 80%;
+    height: 90%;
+    font-size: 18pt;
+}
+
+
+.tableInfo {
+    width: 100%;
+} */
+
+/* .tableInfo tr td:nth-of-type(1) {
+    width: 100px;
+}
+
+.tableInfo tr td:nth-of-type(2) {
+    width: 150px;
+}
+
+.tableInfo tr td:nth-of-type(3),
+.tableInfo tr td:nth-of-type(4) {
+    width: 50%;
+} */
+
+/* .columnCharacteristic1 {
+    background-color: #e1e1e1;
+    width: 100px;
+}
+
+.columnCharacteristic2,
+.inspirationBonus {
+    vertical-align: top;
+    width: 130px;
+}
+
+.columnCharacteristic3,
+.columnCharacteristic4 {
+    vertical-align: top;
+    width: 505px;
+}
+
+.groupCharacteristicsElement {
+    width: 100%;
+    text-align: center;
+}
+
+.groupCharacteristicsElement label {
+    font-size: 10pt;
+    margin: 0;
+}
+
+.characteristicsResultElement {
+    width: 60%;
+    height: 50px;
+    font-size: 20pt;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.characteristicsElement {
+    margin-top: 0;
+    width: 60%;
+    height: 15px;
+    font-size: 12pt;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.passiveAttention {
+    width: 100%;
+} */
+
+/* table {
+    width: 100%;
+} */
+/*
+.spasbroskTable tr td:nth-of-type(1),
+.inspirationBonusTable tr td:nth-of-type(1),
+.skillsTable tr td:nth-of-type(1),
+.passiveAttentionTable:nth-last-of-type(1) {
+    width: 85%;
+    font-size: 10pt;
+}
+
+.spasbroskTable tr td:nth-of-type(2),
+.inspirationBonusTable tr td:nth-of-type(2),
+.skillsTable tr td:nth-of-type(2),
+.passiveAttentionTable:nth-last-of-type(2) {
+    width: 15%;
+    font-size: 10pt;
+}
+
+.spasbrosk p,
+.skills p {
+    text-align: center;
+    font-size: 10pt;
+}
+
+.spasbrosokElement,
+.skillsElement,
+.inspiration,
+.bonus,
+.passive_attention {
+    font-size: 10pt;
+    width: 100%;
+    text-align: center;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+}
+
+.infoElementTable tr:nth-of-type(1) {
+    width: 30%;
+    font-size: 10pt;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.infoElementTable tr:nth-of-type(2) {
+    width: 30%;
+    height: 50px;
+    margin-bottom: 0;
+}
+
+.infoElement {
+    height: 100%;
+    font-size: 20pt;
+    text-align: center;
+}
+
+.equipmentTable {
+    width: 100%;
+}
+
+.healthElement {
+    font-size: 10pt;
+}
+
+.skillsTable {
+    width: 100%;
+} */

@@ -36,7 +36,7 @@ for (index = 0; index < arrSelect.length; index++) {
     SetOption(arrSelect[index], arrNameLocalStorage[index], arrChecked[index]);
 }
 
-arrType = ["namePers", "level", "passive_attention", "bonus", "initiative", "class_armor", "speed", "health_max", "health_current", "health_bones",
+arrType = ["namePers", "level", "passive_attention", "bonus", "initiative", "inspiration", "class_armor", "speed", "health_max", "health_current", "health_bones",
     "forces", "dexterity", "endurance", "intelligence", "wisdom", "charisma",
     "forcesSpasbrosok", "dexteritySpasbrosok", "enduranceSpasbrosok", "intelligenceSpasbrosok", "wisdomSpasbrosok", "charismaSpasbrosok",
     "acrobatics", "athletics", "attention", "survival", "training", "intimidation", "execution", "history", "sleight_hand", "magic", "medicine", "deception",
