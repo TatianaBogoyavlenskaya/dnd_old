@@ -1,5 +1,13 @@
 <!-- Информация о персонаже -->
-<?php session_start();?>
+<?php 
+    session_start();
+    include_once "../workWithDB.php";
+    include_once "persFunction.php";
+    if (!isset($_SESSION["login"])):
+        return null;
+    endif;
+    $result = GetPers();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,20 +21,13 @@
 <body>
     <?php        
         include_once "../header.php";
-        include_once "../workWithDB.php";
-        include_once "persFunction.php";
         include_once "formPers.php";
-        include_once "../footer.php";
-
-        if (!isset($_SESSION["login"])):
-            return null;
-        endif;
-        $result = GetPers();
         GetSelects();
         if ($result != null):
             GetDataPers($result);
             GetCharacteristics();
         endif;
+        include_once "../footer.php";
     ?>
     <script language="JavaScript" src="../js/dataPers.js"></script>
 </body>

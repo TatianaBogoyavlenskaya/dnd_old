@@ -6,6 +6,13 @@
     <title></title>
 </head>
 <body>
-    <h1>DND</h1>
+    <div>
+        <?php //GetSpells();?>
+        <div class="preparedLevel1">
+            <div>1 уровень</div>
+            <div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

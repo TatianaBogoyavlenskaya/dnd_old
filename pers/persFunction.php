@@ -8,6 +8,12 @@
         foreach ($result as $value):
             $id = $value["id"];
             $name = $value["namePers"]; 
+            if (!isset($_COOKIE["idPers"])):
+                
+                setcookie("idPers", $id);
+                $_SESSION["idPers"] = $id;
+            endif;
+            $_SESSION["idPers"] = $_COOKIE["idPers"];
             echo "<script> localStorage.setItem('$name', '$id');</script>";
         endforeach;
         $allPers = SelectFromArray($result, "namePers");
@@ -45,11 +51,11 @@
             $id = $value["id"];
             $name = $value["namePers"]; 
             echo "<script> localStorage.setItem('$name', '$id');</script>";
-            if (!isset($_COOKIE["idPers"])):
-                setcookie("idPers", $value["id"]);
-            endif;
-            $_SESSION["idPers"] = $_COOKIE["idPers"];
-            if ($value["id"] != $_SESSION["idPers"]): 
+            // if (!isset($_COOKIE["idPers"])):
+            //    $_SESSION["idPers"]
+            // endif;
+            // $_SESSION["idPers"] = $_COOKIE["idPers"];
+            if ($id != $_COOKIE["idPers"]): 
                 continue;
             endif;
             SetDataPersInScript($value);
@@ -73,8 +79,6 @@
                 $select = "SELECT * FROM $table WHERE id = ?";
                 $result = Select($select, "s", $id);
                 $keyResult = mysqli_fetch_array($result);
-                echo "<pre>";
-                echo "</pre>";
                 foreach($keyResult as $keyColumn => $data):
                     if (is_numeric($keyColumn)):
                         continue;
@@ -88,6 +92,9 @@
     //Формирование запроса связанных таблиц со списками (рассы/классы и т.д.), получение данных  и их засовывание в localStorage
     function GetDataSelects($table, $column, $localStorage)
     {
+        if (isset($_SESSION[$table])):
+            unset($_SESSION[$table]);
+        endif;
         $select = "SELECT * FROM $table";
         $result = Select($select);
         foreach($result as $data):
@@ -146,4 +153,48 @@
             endif;
         endforeach;
     }
+
+    enum TypePers {
+        case magic;
+        case weapon;
+    }
+
+    //определение класса персонажа
+    function GetClassPers():TypePers
+    {
+        foreach($_SESSION["pers"] as $value):
+            if ($value["id"] != $_SESSION["idPers"]):
+                continue;
+            endif;
+            $select = "SELECT id_class_pers FROM pers WHERE id = ?";
+            $result = Select($select, "s",$value["id"]);
+            $class = mysqli_fetch_array($result)["id_class_pers"];
+            $select = "SELECT nameClass FROM class_pers WHERE id = ?";
+            $result = Select($select, "s",$class);
+            $keyResult = mysqli_fetch_array($result);
+            if (!isset($keyResult["nameClass"])):
+                break;
+            endif;
+            $typePers = $keyResult["nameClass"];
+            $magic = ["Жрец","Друид","Бард","Бард","Паладин","Чародей", "Колдун", "Волшебник"];
+            return (in_array($typePers, $magic))?TypePers::magic : TypePers::weapon;
+        endforeach;
+        return TypePers::weapon;
+    }
+
+    //Вывод заклинаний
+    function WriteSpells()
+    {
+        for ($index = 0; $index < 10; $index++)
+        {
+           $arr = GetSpells($index);
+        }
+    }
+
+    //Получение заклинаний 
+    function GetSpells($level):array
+    {
+
+    }
+
 ?>

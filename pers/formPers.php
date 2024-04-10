@@ -266,4 +266,15 @@
             <div> </div>
         </div>    
     </div>
+
+    <!-- Атаки -->
+    <div class ="columnCharacteristic4"> 
+        <?php
+            if (GetClassPers() == TypePers::magic):
+                include_once "attackMagic.php";
+            else:
+                include_once "attackWeapon.php";
+            endif;
+        ?>
+    </div>
 </form>
