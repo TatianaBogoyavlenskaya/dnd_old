@@ -8,12 +8,16 @@
     <title>О персонаже</title>
     <script language="JavaScript" src="../js/functionPers.js"></script>
     <link rel="stylesheet" href="../css/styleListPers.css">
+    <link rel="stylesheet" href="../css/styleHeaderFooter.css">
 </head>
 <body>
     <?php        
+        include_once "../header.php";
         include_once "../workWithDB.php";
         include_once "persFunction.php";
         include_once "formPers.php";
+        include_once "../footer.php";
+
         if (!isset($_SESSION["login"])):
             return null;
         endif;

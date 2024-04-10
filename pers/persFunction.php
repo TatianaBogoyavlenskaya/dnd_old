@@ -45,13 +45,10 @@
             $id = $value["id"];
             $name = $value["namePers"]; 
             echo "<script> localStorage.setItem('$name', '$id');</script>";
-            // if (!isset($_COOKIE["idPers"])):
-            //     setcookie("idPers", $value["id"]);
-            // endif;
-            if (!isset($_SESSION["idPers"])):
-                $_SESSION["idPers"] = $value["id"];
+            if (!isset($_COOKIE["idPers"])):
+                setcookie("idPers", $value["id"]);
             endif;
-            // $_SESSION["idPers"] = $_COOKIE["idPers"];
+            $_SESSION["idPers"] = $_COOKIE["idPers"];
             if ($value["id"] != $_SESSION["idPers"]): 
                 continue;
             endif;
@@ -115,8 +112,8 @@
     //Сохранение данных о персонаже в localStorage
     function SetDataPersInScript($value)
     {
-        $arrType = ["namePers", "level", "passive_attention","bonus", "initiative", "class_armor", "speed", "health_max", "health_current", "health_bones","tests_death", 
-        "experience", "inspiration"];
+        $arrType = ["namePers", "level", "passive_attention","bonus", "initiative", "class_armor", "speed", "health_max", "health_current", "health_bones","health_bones_curent",
+        "tests_death_success", "tests_death_failure", "experience", "inspiration", "health_temporarily"];
         for ($index = 0; $index < count($arrType); $index++):        
             SetInLocalStorage($arrType[$index], $value[$arrType[$index]]);
         endfor;

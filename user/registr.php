@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styleAutorization.css">
+    <link rel="stylesheet" href="../css/styleHeaderFooter.css">
     <title>Регистрация</title>
 </head>
 <body>
+    <?php include_once "../header.php";?>
     <form method="post">
         <label>
             Логин*
@@ -29,4 +32,7 @@
     </form>
 </body>
 </html>
-<?php include_once "registrAnalysis.php";?>
+<?php 
+    include_once "registrAnalysis.php";
+    include_once "../footer.php";
+?>

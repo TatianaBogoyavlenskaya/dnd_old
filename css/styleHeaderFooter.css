@@ -1,0 +1,12 @@
+h1 {
+    background-color: cadetblue;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.year {
+    font-size: 8pt;
+    position: fixed;
+    bottom: 0;
+}
