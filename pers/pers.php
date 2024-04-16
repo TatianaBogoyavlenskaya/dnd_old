@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>О персонаже</title>
     <script language="JavaScript" src="../js/functionPers.js"></script>
+    <script language="JavaScript" src="../js/functionSetDataPers.js"></script>
     <link rel="stylesheet" href="../css/styleListPers.css">
     <link rel="stylesheet" href="../css/styleAllPanel.css">
     <link rel="stylesheet" href="../css/styleHeaderFooter.css">

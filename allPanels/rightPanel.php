@@ -1,3 +1,4 @@
+<!-- Правая панелька (чат и описания) -->
 <div class = "columnCharacteristic6">
     <div class="description"></div>
     <div class="chat">

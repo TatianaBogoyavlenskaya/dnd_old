@@ -1,3 +1,4 @@
+/* Стили листа персонажа */
 /* Общие настройки */
 body {
     padding: 0;
@@ -317,6 +318,7 @@ fieldset p {
 .column2 {
     width: 50%;
     margin-bottom: 5px;
+    float: left;
 }
 
 .preparedSpells {

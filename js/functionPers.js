@@ -1,3 +1,5 @@
+// Обработчики событий листа перонажа
+
 //выбор персонажа из подменю
 function OnChangedPers(value) {
     id = localStorage.getItem(value);
@@ -76,8 +78,16 @@ function CreateSelect(table, nameColumn, cube, type, isUpdate, label, value = nu
     params.set("cube", cube);
     params.set("value", value);
     params.set("type", type);
-    params.set("isUpdate", isUpdate);
-    SendServer("http://localhost/DND/pers/workWithServer.php", params, label);
+    params.set("typeSelect", ESelectType.updateSelect);
+    SendServer("http://localhost/DND/pers/server/workWithServer.php", params, label);
+}
+
+//основные характеристики
+const ESelectType = {
+    update: 'update',
+    select: 'select',
+    updateSelect: 'updateSelect',
+    delete: 'delete'
 }
 
 //отправка данных на сервер

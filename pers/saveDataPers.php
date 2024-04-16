@@ -1,5 +1,5 @@
-<!-- Сохранение изменений персонажа -->
 <?php 
+// Сохранение изменений персонажа
     if (!isset($_SESSION["idPers"]) || !isset($_POST["level"])):
         return;
     endif;

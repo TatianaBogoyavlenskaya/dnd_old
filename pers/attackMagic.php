@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-</head>
-<body>
+<!-- Блок атаки заклинаниями -->
     <?php //GetSpells();?>
     <div class="attacks">Атаки заклинаниями</div>
     <div class="preparedSpells">
@@ -21,5 +14,3 @@
         <div class="column2">
         </div>
     </div>
-</body>
-</html>

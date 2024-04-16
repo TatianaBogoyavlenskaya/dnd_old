@@ -1,5 +1,6 @@
 <pre>
 <?php 
+// Создание нового персонажа
     if (!isset($_POST["name"]) || !isset($_POST["level"]) ):
         echo "Не все обязательные поля заполнены";
         return;

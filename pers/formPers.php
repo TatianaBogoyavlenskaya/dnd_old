@@ -1,13 +1,6 @@
 <!-- Формирование формы с данными о персонаже -->
 <form method="post">
-    <!-- выбор персонажа -->
-    <div class = "selectPers">
-        <div>Персонаж
-            <select name="namePerses" id = "namePerses" onchange="OnChangedPers(this.value);" class = "namePerses"></select>
-            <input type="button" value="Создать нового" onclick="ClearForm();" class = "newPers"><br>
-        </div>
-    </div>
-
+    <?php include_once "../allPanels/selectedPers.php";?>
     <!-- Основные параметры персонажа -->
     <div class="generalInfo">
         <div class = "name">
