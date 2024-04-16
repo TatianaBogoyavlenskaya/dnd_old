@@ -1,0 +1,27 @@
+/* чат */
+.rightPanel {
+    width: 100%;
+}
+
+.description,
+.chat {
+    height: 40%;
+    width: 100%;
+}
+
+.textareaChat {
+    width: 100%;
+    height: 100%;
+    border: 2px cadetblue solid;
+}
+
+.throwCube {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cube {
+    width: 14%;
+    margin: 0;
+    padding: 0;
+}

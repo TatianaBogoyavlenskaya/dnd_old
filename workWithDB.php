@@ -1,5 +1,5 @@
-<!-- Взаимодействие с БД -->
 <?php
+    //Взаимодействие с БД
     $GLOBALS["hostname"] = "localhost";
     $GLOBALS["username"] = "root";
     $GLOBALS["passwordDB"] = "";

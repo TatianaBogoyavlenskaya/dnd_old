@@ -8,12 +8,12 @@
         foreach ($result as $value):
             $id = $value["id"];
             $name = $value["namePers"]; 
-            if (!isset($_COOKIE["idPers"])):
-                
+            if (!isset($_COOKIE["idPers"])):                
                 setcookie("idPers", $id);
                 $_SESSION["idPers"] = $id;
+            else:
+                $_SESSION["idPers"] = $_COOKIE["idPers"];
             endif;
-            $_SESSION["idPers"] = $_COOKIE["idPers"];
             echo "<script> localStorage.setItem('$name', '$id');</script>";
         endforeach;
         $allPers = SelectFromArray($result, "namePers");
@@ -37,7 +37,7 @@
     function GetCharacteristics()
     {
         $arrCharacteristic = ["characteristics", "skills", "spasbrosok"];
-        $arrLocalStorageAdd = ["", "", "Spasbrosok"];
+        $arrLocalStorageAdd = ["", "Radio", "SpasbrosokRadio"];
         for ($index = 0; $index < count($arrCharacteristic); $index++):
             GenerateSelectAllData($arrCharacteristic[$index], $arrLocalStorageAdd[$index]);
         endfor;
@@ -51,12 +51,14 @@
             $id = $value["id"];
             $name = $value["namePers"]; 
             echo "<script> localStorage.setItem('$name', '$id');</script>";
-            // if (!isset($_COOKIE["idPers"])):
-            //    $_SESSION["idPers"]
-            // endif;
-            // $_SESSION["idPers"] = $_COOKIE["idPers"];
-            if ($id != $_COOKIE["idPers"]): 
-                continue;
+            if (isset($_COOKIE["idPers"])):
+                if ($id != $_COOKIE["idPers"]): 
+                    continue;
+                endif;
+            else:
+                if ($id != $_SESSION["idPers"]): 
+                    continue;
+                endif;
             endif;
             SetDataPersInScript($value);
             break;
@@ -119,7 +121,7 @@
     //Сохранение данных о персонаже в localStorage
     function SetDataPersInScript($value)
     {
-        $arrType = ["namePers", "level", "passive_attention","bonus", "initiative", "class_armor", "speed", "health_max", "health_current", "health_bones","health_bones_curent",
+        $arrType = ["namePers", "level", "bonus", "initiative", "class_armor", "speed", "health_max", "health_current", "health_bones","health_bones_curent",
         "tests_death_success", "tests_death_failure", "experience", "inspiration", "health_temporarily"];
         for ($index = 0; $index < count($arrType); $index++):        
             SetInLocalStorage($arrType[$index], $value[$arrType[$index]]);
@@ -185,16 +187,28 @@
     //Вывод заклинаний
     function WriteSpells()
     {
-        for ($index = 0; $index < 10; $index++)
-        {
+        for ($index = 0; $index < 10; $index++):
            $arr = GetSpells($index);
-        }
+        endfor;
     }
 
     //Получение заклинаний 
     function GetSpells($level):array
     {
-
+        $select = "SELECT * FROM spellsOfPers WHERE idPers=?";
+        $result = Select($select,"i", $_SESSION["idPers"]);
+        $idSpells = mysqli_fetch_array($result)["id_spells"];
+        $arrSpells= array();
+        foreach($idSpells as $id):
+            $select = "SELECT * FROM spells WHERE id=?";
+            $result = Select($select,"i", $id);
+            $spells = mysqli_fetch_array($result);
+            if ($spells["level"] != $level):
+                continue;
+            endif;
+            $arrSpells[] = $spells["name"];
+        endforeach;
+        return $arrSpells;
     }
 
 ?>

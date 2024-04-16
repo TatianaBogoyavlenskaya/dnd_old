@@ -16,6 +16,7 @@
     <title>О персонаже</title>
     <script language="JavaScript" src="../js/functionPers.js"></script>
     <link rel="stylesheet" href="../css/styleListPers.css">
+    <link rel="stylesheet" href="../css/styleAllPanel.css">
     <link rel="stylesheet" href="../css/styleHeaderFooter.css">
 </head>
 <body>
