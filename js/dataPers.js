@@ -1,12 +1,13 @@
 // Заполнение данными листа персонажа
-arrSelect = ["namePerses", "race", "class_pers", "outlook"];
-arrChecked = ["namePers", "race", "class_pers", "outlook"];
-arrNameLocalStorage = ["allPers", "allRace", "allClass", "allOutlook"];
+SetSelectPers();
+arrSelect = ["race", "class_pers", "outlook"];
+arrChecked = ["race", "class_pers", "outlook"];
+arrNameLocalStorage = ["allRace", "allClass", "allOutlook"];
 for (index = 0; index < arrSelect.length; index++) {
     SetOption(arrSelect[index], arrNameLocalStorage[index], arrChecked[index]);
 }
 arrType = ["namePers", "level", "passive_attention", "bonus", "initiative", "inspiration", "class_armor", "speed", "health_max", "health_current", "health_bones",
-    "forces", "dexterity", "endurance", "intelligence", "wisdom", "charisma", "experience"];
+    "forces", "dexterity", "endurance", "intelligence", "wisdom", "charisma", "experience", "health_temporarily", "health_bones_curent"];
 for (index = 0; index < arrType.length; index++) {
     SetInput(arrType[index]);
 }

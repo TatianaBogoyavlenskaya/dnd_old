@@ -1,6 +1,6 @@
 <?php
     // Работа с данными о персонаже
-
+    
     //Получение списка персонажей игрока    
     function GetPers()
     {        
@@ -11,7 +11,8 @@
             $id = $value["id"];
             $name = $value["namePers"]; 
             if (!isset($_COOKIE["idPers"])):                
-                setcookie("idPers", $id);
+                setcookie("idPers", $id,0,"/");
+                echo "<script> localStorage.setItem('idPers', '$id');</script>";
                 $_SESSION["idPers"] = $id;
             else:
                 $_SESSION["idPers"] = $_COOKIE["idPers"];
@@ -27,9 +28,9 @@
     //получение значений списков
     function GetSelects()
     {
-        $arrTable = ["race", "class_pers", "outlook"];
-        $arrColumne = ["nameRace", "nameClass", "nameOutlook"];
-        $arrLocalStorage = ["allRace", "allClass", "allOutlook"];
+        $arrTable = ["race", "class_pers", "outlook","type_subject"];
+        $arrColumne = ["nameRace", "nameClass", "nameOutlook","type"];
+        $arrLocalStorage = ["allRace", "allClass", "allOutlook","allTypeSubject"];
         for($index =0; $index < count($arrTable); $index++):
             GetDataSelects($arrTable[$index], $arrColumne[$index], $arrLocalStorage[$index]);
         endfor;

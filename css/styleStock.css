@@ -1,0 +1,83 @@
+/* Снаряжение */
+.equipmentAndStock {
+    width: 100%;
+}
+
+.equipment {
+    width: 40%;
+    float: left;
+    margin: 2px;
+}
+
+.stock {
+    width: 40%;
+    float: left;
+}
+
+.money {
+    width: 100%;
+    float: right;
+}
+
+.moneyLabel,
+.weightLabel {
+    padding: 0 2px 0 2px;
+    float: left;
+}
+
+.moneyValue {
+    width: 10%;
+    float: left;
+}
+
+/* Инвентарь */
+.weight,
+.sertch,
+.stockPannel,
+.equipmentDressed {
+    width: 100%;
+    float: left;
+    margin: 2px;
+}
+
+.weightValue {
+    width: 10%;
+}
+
+.sertchText {
+    float: left;
+    width: 65%;
+}
+
+.sertchButton {
+    width: 15%;
+    float: left;
+}
+
+.typeSubject {
+    width: 20%;
+    float: left;
+}
+
+.stockPannelElement {
+    width: 100%;
+}
+
+.nameElementStock {
+    width: 15%;
+    float: left;
+}
+
+.nameElementStock:nth-child(1) {
+    width: 55%;
+    float: left;
+}
+
+.persIcon {
+    background-image: url("../icon/pers.png");
+    height: 40px;
+    width: 40px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    float: right;
+}

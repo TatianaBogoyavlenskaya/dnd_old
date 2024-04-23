@@ -101,11 +101,6 @@ div {
     flex-wrap: wrap;
 }
 
-.columnCharacteristic6 {
-    width: 300px;
-    float: right;
-}
-
 .clickableDiv,
 .clickableInput,
 .clickableLabel {
@@ -230,6 +225,7 @@ div {
     padding: 0;
     margin: 0;
     float: left;
+    text-align: center;
 }
 
 fieldset {

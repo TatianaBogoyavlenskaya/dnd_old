@@ -1,13 +1,13 @@
 <?php 
     //запрос на обновление данных в бд из js
     include_once "../workWithDB.php";
-    include_once "getThrow.php";
     function SetSelect()
     {
         $table = (isset($_POST["table"]))?$_POST["table"]: null;
         $nameColumn = (isset($_POST["nameColumn"]))?$_POST["nameColumn"]: null;
         $id = $_POST["idPers"];
         $value =  mt_rand(1,$_POST["cube"]);
+
         $select = "SELECT * FROM pers WHERE id=?";
         $result = Select($select,"i", $id);
         $resultArray = mysqli_fetch_array($result);

@@ -4,6 +4,12 @@ function SetOption(select, nameLocalStorage, checked) {
     var selectName = document.getElementById(select);
     value = localStorage.getItem(nameLocalStorage);
     all = JSON.parse(value);
+    if (nameLocalStorage == "allTypeSubject") {
+        for (indexRewrite = all.length - 1; indexRewrite >= 0; indexRewrite--) {
+            all[indexRewrite + 1] = all[indexRewrite];
+        }
+        all[0] = "Не выбрано";
+    }
     for (indexElement = 0; indexElement < all.length; indexElement++) {
         ob = document.createElement('Option');
         ob.setAttribute('value', all[indexElement]);

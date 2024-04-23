@@ -1,9 +1,10 @@
 // Обработчики событий листа перонажа
 
 //выбор персонажа из подменю
-function OnChangedPers(value) {
+async function OnChangedPers(value) {
     id = localStorage.getItem(value);
-    document.cookie = "idPers = " + id;
+    document.cookie = "idPers = " + id + "; path = /";
+    localStorage.setItem('namePers', value);
     location.reload();
 }
 //Очиства формы для нового персонажа
@@ -42,7 +43,6 @@ function OnChangedCube(cube, label = null, nameParametr = null) {
     if (nameParametr != null) {
         var inputParameter = document.getElementById(nameParametr);
         result += inputParameter.value * 1;
-        console.log(text);
         text.value += label + ": \n\t" + value + " + (" + inputParameter.value + ") = ";
     }
     else {
@@ -53,56 +53,83 @@ function OnChangedCube(cube, label = null, nameParametr = null) {
 }
 
 //действия над здоровьем
-function ChengedHealth(value, label, nameColumn, type) {
-    var input = document.getElementById(text);
+async function ChengedHealth(value, label, nameColumn) {
+    if (value == 0) return;
+    var input = document.getElementById(nameColumn);
     input.value = value;
-    CreateSelect(null, nameColumn, null, type, true, label, input.value);
+    const newValue = await CreateSelect(null, nameColumn, null, label, 1, input.value);
+    input.value = newValue;
+
+    var input = document.getElementById("namePers");
+    var text = document.getElementById("textareaChat");
+    text.value += input.value + " => " + label + value + " = " + newValue + "\n";
+}
+
+function KeyDown(e) {
+    // console.log(e.code);
+    //TODO: сделать проверку нажатой клавишы
 }
 
 //создание запроса
-function CreateSelect(table, nameColumn, cube, type, isUpdate, label, value = null) {
-    cookie = document.cookie;
-    cookieParts = cookie.split("=");
-    index = 0;
-    while (cookieParts[index] != "idPers") {
-        index += 2;
-        if (index > cookieParts.length) {
-            return;
-        }
-    }
-    id = cookieParts[index + 1];
+function CreateSelect(table, nameColumn, cube, label, idSelect, value = null) {
+    id = localStorage.getItem('idPers');
     params = new URLSearchParams();
     params.set("idPers", id);
     params.set("table", table);
     params.set("nameColumn", nameColumn);
     params.set("cube", cube);
     params.set("value", value);
-    params.set("type", type);
-    params.set("typeSelect", ESelectType.updateSelect);
-    SendServer("http://localhost/DND/pers/server/workWithServer.php", params, label);
-}
-
-//основные характеристики
-const ESelectType = {
-    update: 'update',
-    select: 'select',
-    updateSelect: 'updateSelect',
-    delete: 'delete'
+    params.set("idSelect", idSelect);
+    return SendServer("http://localhost/DND/server/workWithServer.php", params, label);
 }
 
 //отправка данных на сервер
 async function SendServer(addres, params, label) {
-    await fetch(addres, {
+    return await fetch(addres, {
         method: "POST",
         body: params
     }).then(responce => responce.json())
         .then((data) => {
-            var text = document.getElementById("textareaChat");
-            text.value += data["namePers"] + " => " + label + ": \n\t" + data["value"] + "\n";
-            text.scrollBy(0, 30);
+            return data["value"];
         });
 }
 
 function OpenStock() {
-    //TODO: открыть другой файл во 2 окне
+    location.assign("../stock/stockPers.php");
+    // Открыть в новой вкладке
+}
+function OpenListPers() {
+    location.assign("../pers/pers.php");
+}
+
+//добавление персов в выпадающий список
+function SetSelectPers() {
+    SetOption("namePerses", "allPers", "namePers");
+}
+
+//получение инвентаря
+function GetStock() {
+    GetDataMoney();
+    GetDataWaight();
+}
+
+//получение количества денег
+function GetDataMoney() {
+    arrMoney = ["platinum", "gold", "silver", "bronze"];
+    for (index = 0; index < arrMoney.length; index++) {
+        SetInput(arrMoney[index]);
+    }
+}
+//вывод веса в инвентаре
+function GetDataWaight() {
+    arrWaight = ["curentWeight", "maxWeight"];
+    maxWeight = localStorage.getItem("forces") * 10; //TODO: поставить правильную формулу расчета
+    localStorage.setItem('maxWeight', maxWeight);
+    for (index = 0; index < arrWaight.length; index++) {
+        SetInput(arrWaight[index]);
+    }
+}
+//вывод описания предмета
+async function GetDiscriptionSubject(id) {
+    //await CreateSelect(null, nameColumn, null, type, label, "updateSelect", input.value);
 }
