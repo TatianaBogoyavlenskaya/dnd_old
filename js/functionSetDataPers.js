@@ -1,28 +1,20 @@
 // Функции заполнения листа персонажа
-// установка набора данных в select
-function SetOption(select, nameLocalStorage, checked) {
+
+function SetOption(select, checked, value) {
     var selectName = document.getElementById(select);
-    value = localStorage.getItem(nameLocalStorage);
-    all = JSON.parse(value);
-    if (nameLocalStorage == "allTypeSubject") {
-        for (indexRewrite = all.length - 1; indexRewrite >= 0; indexRewrite--) {
-            all[indexRewrite + 1] = all[indexRewrite];
-        }
-        all[0] = "Не выбрано";
-    }
-    for (indexElement = 0; indexElement < all.length; indexElement++) {
+    for (indexElement = 0; indexElement < value.length; indexElement++) {
         ob = document.createElement('Option');
-        ob.setAttribute('value', all[indexElement]);
-        ob.appendChild(document.createTextNode(all[indexElement]));
+        ob.setAttribute('value', value[indexElement]);
+        ob.appendChild(document.createTextNode(value[indexElement]));
         selectName.appendChild(ob);
-    };
-    selectName.value = localStorage.getItem(checked);
+    }
+    selectName.value = checked;
 }
 
 //Установка данных в текстовые поля input
-function SetInput(text) {
-    var input = document.getElementById(text);
-    input.value = localStorage.getItem(text);
+function SetInput(id, text) {
+    var input = document.getElementById(id);
+    input.value = text;
 }
 
 //Расчет и установка значений модификаторов характеристик
@@ -45,6 +37,7 @@ const ESkillType = {
     wisdom: 'wisdom',
     charisma: 'charisma'
 }
+
 //класс навыков и спасбросков
 class Skill {
     constructor(type, name, tag) {
@@ -55,15 +48,16 @@ class Skill {
 }
 
 //Расчет характеристик
-function CalculeteSkillsAndSpasbrosoks() {
+async function CalculeteSkillsAndSpasbrosoks() {
     arrSkills = [
-        new Skill(ESkillType.forces, "forcesSpasbrosok", "forcesSpasbrosok"),
-        new Skill(ESkillType.dexterity, "dexteritySpasbrosok", "dexteritySpasbrosok"),
-        new Skill(ESkillType.endurance, "enduranceSpasbrosok", "enduranceSpasbrosok"),
-        new Skill(ESkillType.intelligence, "intelligenceSpasbrosok", "intelligenceSpasbrosok"),
-        new Skill(ESkillType.wisdom, "wisdomSpasbrosok", "wisdomSpasbrosok"),
-        new Skill(ESkillType.charisma, "charismaSpasbrosok", "charismaSpasbrosok"),
-
+        new Skill(ESkillType.forces, "forces", "forcesSpasbrosok"),
+        new Skill(ESkillType.dexterity, "dexterity", "dexteritySpasbrosok"),
+        new Skill(ESkillType.endurance, "endurance", "enduranceSpasbrosok"),
+        new Skill(ESkillType.intelligence, "intelligence", "intelligenceSpasbrosok"),
+        new Skill(ESkillType.wisdom, "wisdom", "wisdomSpasbrosok"),
+        new Skill(ESkillType.charisma, "charisma", "charismaSpasbrosok")
+    ];
+    arrSkills2 = [
         new Skill(ESkillType.dexterity, "acrobatics", "acrobatics"),
         new Skill(ESkillType.endurance, "athletics", "athletics"),
         new Skill(ESkillType.intelligence, "attention", "attention"),
@@ -85,21 +79,66 @@ function CalculeteSkillsAndSpasbrosoks() {
     ];
     input = document.getElementById("bonus");
     bonus = input.value;
+    table = ["spasbrosok", "skills"];
+
+    params = new URLSearchParams();
+    params.set("idSelect", 5);
+    params.set("table", table[0]);
+    params.set("idPers", localStorage.getItem('idPers'));
+    newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
 
     for (indexSkills = 0; indexSkills < arrSkills.length; indexSkills++) {
         var radio = document.getElementById(arrSkills[indexSkills].Tag + "Radio");
-        radio.checked = (localStorage.getItem(arrSkills[indexSkills].Tag + "Radio") == 1) ? true : false;
+        radio.checked = (newValue[arrSkills[indexSkills].Name] == 1) ? true : false;
         var input = document.getElementById(arrSkills[indexSkills].Type);
         resultValue = Math.floor((input.value - 10) / 2);
         if (radio.checked == true) {
             resultValue = resultValue + bonus * 1;
         }
-        localStorage.setItem(arrSkills[indexSkills].Tag, resultValue);
-        SetInput(arrSkills[indexSkills].Tag);
+        SetInput(arrSkills[indexSkills].Tag, resultValue);
     }
+    params.set("table", table[1]);
+    newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
+    for (indexSkills = 0; indexSkills < arrSkills2.length; indexSkills++) {
+        var radio = document.getElementById(arrSkills2[indexSkills].Tag + "Radio");
+        radio.checked = (newValue[arrSkills2[indexSkills].Name] == 1) ? true : false;
+        var input = document.getElementById(arrSkills2[indexSkills].Type);
+        resultValue = Math.floor((input.value - 10) / 2);
+        if (radio.checked == true) {
+            resultValue = resultValue + bonus * 1;
+        }
+        SetInput(arrSkills2[indexSkills].Tag, resultValue);
+    }
+
+
+    // GetCharacteristickWithRadio(arrSkills,bonus,"spasbrosok");
+    // GetCharacteristickWithRadio(arrSkills2,bonus,"skills");
+
 
     var input = document.getElementById(ESkillType.intelligence);
     var resultValue = Math.floor((input.value - 10) / 2);
-    localStorage.setItem("passive_attention", 10 + resultValue);
-    SetInput("passive_attention");
+    // localStorage.setItem("passive_attention", 10 + resultValue);
+    SetInput("passive_attention", 10 + resultValue);
 }
+
+// async function GetCharacteristickWithRadio(arrSkills, bonus, table) {
+//     for (indexSkills = 0; indexSkills < arrSkills.length; indexSkills++) {
+//         var radio = document.getElementById(arrSkills[indexSkills].Tag + "Radio");
+//
+//         params = new URLSearchParams();
+//         params.set("idSelect", 5);
+//         params.set("table", table);
+//         params.set("nameColumn", arrSkills[indexSkills].Name);
+//         params.set("idPers", localStorage.getItem('idPers'));
+//         const newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
+//
+//         radio.checked = (newValue["value"] == 1) ? true : false;
+//         var input = document.getElementById(arrSkills[indexSkills].Type);
+//         resultValue = Math.floor((input.value - 10) / 2);
+//         if (radio.checked == true) {
+//             resultValue = resultValue + bonus * 1;
+//         }
+//         // localStorage.setItem(arrSkills[indexSkills].Tag, resultValue);
+//         SetInput(arrSkills[indexSkills].Tag, resultValue);
+//     }
+// }

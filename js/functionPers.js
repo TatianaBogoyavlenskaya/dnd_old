@@ -5,9 +5,10 @@ async function OnChangedPers(value) {
     id = localStorage.getItem(value);
     document.cookie = "idPers = " + id + "; path = /";
     localStorage.setItem('namePers', value);
+    localStorage.setItem('idPers', id);
     location.reload();
 }
-//Очиства формы для нового персонажа
+//Очистка формы для нового персонажа
 function ClearForm() {
     arrType = ["namePers", "level", "passive_attention", "bonus", "initiative", "class_armor", "speed", "health_max", "health_current", "health_bones",
         "forces", "dexterity", "endurance", "intelligence", "wisdom", "charisma",
@@ -34,16 +35,20 @@ function ClearInput(name) {
 }
 
 //бросок кубика
-function OnChangedCube(cube, label = null, nameParametr = null) {
+async function OnChangedCube(cube, label = null, nameParametr = null) {
     var input = document.getElementById("namePers");
     value = Math.floor(Math.random() * cube);
     result = value;
     var text = document.getElementById("textareaChat");
     text.value += input.value + " => ";
     if (nameParametr != null) {
-        var inputParameter = document.getElementById(nameParametr);
-        result += inputParameter.value * 1;
-        text.value += label + ": \n\t" + value + " + (" + inputParameter.value + ") = ";
+        params = new URLSearchParams();
+        params.set("idPers", localStorage.getItem("idPers"));
+        params.set("nameColumn", nameParametr);
+        params.set("idSelect", 2);
+        const newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
+        text.value += label + ": \n\t" + value + " + (" + newValue + ") = ";
+        result = value + newValue;
     }
     else {
         text.value += "d" + cube + " = ";
@@ -56,42 +61,21 @@ function OnChangedCube(cube, label = null, nameParametr = null) {
 async function ChengedHealth(value, label, nameColumn) {
     if (value == 0) return;
     var input = document.getElementById(nameColumn);
-    input.value = value;
-    const newValue = await CreateSelect(null, nameColumn, null, label, 1, input.value);
-    input.value = newValue;
-
+    params = new URLSearchParams();
+    params.set("idSelect", 1);
+    params.set("idPers",  localStorage.getItem('idPers'));
+    params.set("nameColumn", nameColumn);
+    params.set("value", value);
+    const newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
+    input.value = newValue["value"];
     var input = document.getElementById("namePers");
     var text = document.getElementById("textareaChat");
-    text.value += input.value + " => " + label + value + " = " + newValue + "\n";
+    text.value += input.value + " => " + label + value + " = " + newValue["value"] + "\n";
 }
 
 function KeyDown(e) {
     // console.log(e.code);
     //TODO: сделать проверку нажатой клавишы
-}
-
-//создание запроса
-function CreateSelect(table, nameColumn, cube, label, idSelect, value = null) {
-    id = localStorage.getItem('idPers');
-    params = new URLSearchParams();
-    params.set("idPers", id);
-    params.set("table", table);
-    params.set("nameColumn", nameColumn);
-    params.set("cube", cube);
-    params.set("value", value);
-    params.set("idSelect", idSelect);
-    return SendServer("http://localhost/DND/server/workWithServer.php", params, label);
-}
-
-//отправка данных на сервер
-async function SendServer(addres, params, label) {
-    return await fetch(addres, {
-        method: "POST",
-        body: params
-    }).then(responce => responce.json())
-        .then((data) => {
-            return data["value"];
-        });
 }
 
 function OpenStock() {

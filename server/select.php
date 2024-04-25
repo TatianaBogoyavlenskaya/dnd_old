@@ -1,39 +1,62 @@
-<?php 
-    //запрос на обновление данных в бд из js
-    include_once "../workWithDB.php";
-    function SetSelect()
-    {
-        $table = (isset($_POST["table"]))?$_POST["table"]: null;
-        $nameColumn = (isset($_POST["nameColumn"]))?$_POST["nameColumn"]: null;
-        $id = $_POST["idPers"];
-        $value =  mt_rand(1,$_POST["cube"]);
+<?php
+//запрос на обновление данных в бд из js
+include_once "../workWithDB.php";
+function SetSelect($table, $nameColumn, $id, &$out): array
+{
+    $select = "SELECT * FROM pers WHERE id=?";
+    $result = Select($select, "i", $id);
+    $resultArray = mysqli_fetch_array($result)["id_" . $table];
+    $valueCharacteristic = GetCharacteristic($table, $nameColumn, $resultArray);
+    $out["value"] = floor(($valueCharacteristic - 10) / 2);
+    return $out;
+}
 
-        $select = "SELECT * FROM pers WHERE id=?";
-        $result = Select($select,"i", $id);
-        $resultArray = mysqli_fetch_array($result);
-        $namePers = $resultArray["namePers"];
-        $out["namePers"] = $namePers;
-        if ($table == "null" && $nameColumn != "null") : 
-            $getValue = $resultArray[$nameColumn];
-            $out["value"] = "$value + (".$getValue.") = ".($getValue+$value);
-        else:
-            $out["value"] = ($table != "null" && $nameColumn != "null") ? "$value+(".GetCharacteristic($table,$nameColumn, $id,$value) : $value;
-        endif;
-        return $out;
-    }
+function GetCharacteristic($table, $name, $id)
+{
+    $select = "SELECT * FROM $table WHERE id=?";
+    $result = Select($select, "i", $id);
+    return mysqli_fetch_array($result)[$name];
+}
 
-    function GetCharacteristic($table,$name, $id,$value)
-    {
-        $select = "SELECT * FROM pers WHERE id =?";     
-        $result = Select($select,"i",$id);
-        $idCharacteristic = mysqli_fetch_array($result)["id_".$table];
-        
-        $select = "SELECT * FROM $table WHERE id=?";
-        $result = Select($select,"i", $idCharacteristic);
-        $valueCharacteristic = mysqli_fetch_array($result)[$name];
-        if ($table == "characteristics"):
-            $valueCharacteristic = floor(($valueCharacteristic-10)/2);
-        endif;
-        return $valueCharacteristic.") = ".$value+$valueCharacteristic;
+function GetListData($table, $column, &$out, $login = null)
+{
+    if ($login != null):
+        $select = "SELECT * FROM $table WHERE loginUser =?";
+        $result = Select($select, "s", $login);
+    else:
+        $select = "SELECT * FROM $table";
+        $result = Select($select);
+    endif;
+    foreach ($result as $value) {
+        $out["value"][] = $value[$column];
     }
+}
+
+//Получение индекса связанной таблицы
+function GetSelectPersData($id, $column)
+{
+    $select = "SELECT * FROM pers WHERE id =?";
+    $result = Select($select, "i", $id);
+    return mysqli_fetch_array($result)[$column];
+}
+
+//Получение данных для комбобоксов
+function GetSelectData($table, $column, $id, &$out)
+{
+    $select = "SELECT * FROM $table WHERE id =?";
+    $result = Select($select, "i", $id);
+    $out["select"] = mysqli_fetch_array($result)[$column];
+}
+
+//Получение данных персонажа
+function GetDataPersForInput($table, $id, &$out): void
+{
+    $select = "SELECT * FROM $table WHERE id =?";
+    $result = Select($select, "s", $id);
+    $value = mysqli_fetch_array($result);
+    foreach ($value as $key => $textColumn):
+        $out[$key] = $textColumn;
+    endforeach;;
+}
+
 ?>

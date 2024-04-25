@@ -19,9 +19,6 @@
             endif;
             echo "<script> localStorage.setItem('$name', '$id');</script>";
         endforeach;
-        $allPers = SelectFromArray($result, "namePers");
-        $allPersJson = json_encode(json_encode($allPers));
-        echo "<script> localStorage.setItem('allPers', $allPersJson);</script>";        
         return $result;
     }   
 
@@ -112,13 +109,11 @@
     }
 
     //Формирование массива из запроса
-    function SelectFromArray($result, $name)
+    function SelectFromArray($result, $column, &$out = null)
     {
-        $all = array();
-        foreach ($result as $value):           
-           $all[] = $value[$name];
-        endforeach;
-        return $all;
+        foreach ($result as $value) {
+            $out["value"][] = $value[$column];
+        }
     }
 
     //Сохранение данных о персонаже в localStorage

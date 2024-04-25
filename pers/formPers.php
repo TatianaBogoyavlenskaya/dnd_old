@@ -36,27 +36,27 @@
     <div class="columnCharacteristic1_2">
         <!-- характеристики -->
         <div class ="columnCharacteristic1">
-            <div class="groupCharacteristicsElement clickableDiv" onclick="OnChangedCube(20,'Сила','forcesResult');">Сила<br>
+            <div class="groupCharacteristicsElement clickableDiv" onclick="OnChangedCube(20,'Сила','forces');">Сила<br>
                 <input readonly type="text" name="forcesResult" id="forcesResult" class="characteristicsResultElement clickableInput">
                 <input readonly type="text" name="forces" id="forces" class="characteristicsElement clickableInput">
             </div>
-            <div class="groupCharacteristicsElement clickableDiv" onclick="OnChangedCube(20,'Ловкость','dexterityResult');">Ловкость<br>
+            <div class="groupCharacteristicsElement clickableDiv" onclick="OnChangedCube(20,'Ловкость','dexterity');">Ловкость<br>
                 <input readonly type="text" name="dexterityResult" id="dexterityResult" class="characteristicsResultElement clickableInput">
                 <input readonly type="text" name="dexterity" id="dexterity" class="characteristicsElement clickableInput">
             </div>
-            <div class="groupCharacteristicsElement clickableDiv" onclick="OnChangedCube(20,'Выносливость','enduranceResult');">Выносливость<br>
+            <div class="groupCharacteristicsElement clickableDiv" onclick="OnChangedCube(20,'Выносливость','endurance');">Выносливость<br>
                 <input readonly type="text" name="enduranceResult" id="enduranceResult" class="characteristicsResultElement clickableInput">
                 <input readonly type="text" name="endurance" id="endurance" class="characteristicsElement clickableInput">
             </div>
-            <div class="groupCharacteristicsElement clickableDiv" onclick="OnChangedCube(20,'Интеллект','intelligenceResult');">Интеллект<br>
+            <div class="groupCharacteristicsElement clickableDiv" onclick="OnChangedCube(20,'Интеллект','intelligence');">Интеллект<br>
                 <input readonly type="text" name="intelligenceResult" id="intelligenceResult" class="characteristicsResultElement clickableInput">
                 <input readonly type="text" name="intelligence" id="intelligence" class="characteristicsElement clickableInput">
             </div>
-            <div class="groupCharacteristicsElement clickableDiv" onclick="OnChangedCube(20,'Мудрость','wisdomResult');">Мудрость<br>
+            <div class="groupCharacteristicsElement clickableDiv" onclick="OnChangedCube(20,'Мудрость','wisdom');">Мудрость<br>
                 <input readonly type="text" name="wisdomResult" id="wisdomResult" class="characteristicsResultElement clickableInput">
                 <input readonly type="text" name="wisdom" id="wisdom" class="characteristicsElement clickableInput">
             </div>
-            <div class="groupCharacteristicsElement clickableDiv" onclick="OnChangedCube(20,'Харизма','charismaResult');">Харизма<br>
+            <div class="groupCharacteristicsElement clickableDiv" onclick="OnChangedCube(20,'Харизма','charisma');">Харизма<br>
                 <input readonly type="text" name="charismaResult" id="charismaResult" class="characteristicsResultElement clickableInput">
                 <input readonly type="text" name="charisma" id="charisma" class="characteristicsElement clickableInput">
             </div>
@@ -79,32 +79,32 @@
             <!-- спасброски -->
             <div>
                 <p>Спасброски</p>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Спасбросок (Сила)','forcesSpasbrosok');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Спасбросок (Сила)','forces');">
                     <input readonly type="radio" class="radioSpasbrosok" name = "forcesSpasbrosokRadio" id="forcesSpasbrosokRadio">
                     <label class="nameCharacteristic clickable">Сила</label>
                     <input readonly type="text" name="forcesSpasbrosok" id="forcesSpasbrosok" class="spasbrosokElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Спасбросок (Ловкость)','dexteritySpasbrosok');">                   
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Спасбросок (Ловкость)','dexterity');">                   
                     <input readonly type="radio" class="radioSpasbrosok" name = "dexteritySpasbrosokRadio" id="dexteritySpasbrosokRadio">
                     <label class="nameCharacteristic clickable">Ловкость</label>
                     <input readonly type="text" name="dexteritySpasbrosok" id="dexteritySpasbrosok" class="spasbrosokElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Спасбросок (Выносливость)','enduranceSpasbrosok');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Спасбросок (Выносливость)','endurance');">
                     <input readonly type="radio" class="radioSpasbrosok" name = "enduranceSpasbrosokRadio" id="enduranceSpasbrosokRadio">
                     <label class="nameCharacteristic clickable">Выносливость</label>
                     <input readonly type="text" name="enduranceSpasbrosok" id="enduranceSpasbrosok" class="spasbrosokElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Спасбросок (Интеллект)','intelligenceSpasbrosok');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Спасбросок (Интеллект)','intelligence');">
                     <input readonly type="radio" class="radioSpasbrosok" name = "intelligenceSpasbrosokRadio" id="intelligenceSpasbrosokRadio">
                     <label class="nameCharacteristic clickable">Интеллект</label>
                     <input readonly type="text" name="intelligenceSpasbrosok" id="intelligenceSpasbrosok" class="spasbrosokElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Спасбросок (Мудрость)','wisdomSpasbrosok');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Спасбросок (Мудрость)','wisdom');">
                     <input readonly type="radio" class="radioSpasbrosok" name = "wisdomSpasbrosokRadio" id="wisdomSpasbrosokRadio">
                     <label class="nameCharacteristic clickable">Мудрость</label>
                     <input readonly type="text" name="wisdomSpasbrosok" id="wisdomSpasbrosok" class="spasbrosokElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Спасбросок (Харизма)','charismaSpasbrosok');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Спасбросок (Харизма)','charisma');">
                     <input readonly type="radio" class="radioSpasbrosok" name = "charismaSpasbrosokRadio" id="charismaSpasbrosokRadio">
                     <label class="nameCharacteristic clickable">Харизма</label>
                     <input readonly type="text" name="charismaSpasbrosok" id="charismaSpasbrosok" class="spasbrosokElement clickableInput">
@@ -114,92 +114,92 @@
             <!-- Навыки -->
             <div>
                 <p>Навыки</p>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Акробатика','acrobatics');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Акробатика','dexterity');">
                     <input readonly type="radio" class="radioCharacteristic" name = "acrobaticsRadio" id="acrobaticsRadio">
                     <label class="nameCharacteristic clickableLabel">Акробатика</label>
                     <input readonly type="text" name="acrobatics" id="acrobatics" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Атлетика','athletics');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Атлетика','endurance');">
                     <input readonly type="radio" class="radioCharacteristic" name = "athleticsRadio" id="athleticsRadio">
                     <label class="nameCharacteristic clickableLabel">Атлетика</label>
                     <input readonly type="text" name="athletics" id="athletics" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Внимание','attention');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Внимание','intelligence');">
                     <input readonly type="radio" class="radioCharacteristic" name = "attentionRadio" id="attentionRadio">
                     <label class="nameCharacteristic clickableLabel">Внимание</label>
                     <input readonly type="text" name="attention" id="attention" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Выживание','survival');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Выживание','forces');">
                     <input readonly type="radio" class="radioCharacteristic" name = "survivalRadio" id="survivalRadio">
                     <label class="nameCharacteristic clickableLabel">Выживание</label>
                     <input readonly type="text" name="survival" id="survival" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Дрессировка','training');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Дрессировка','charisma');">
                     <input readonly type="radio" class="radioCharacteristic" name = "trainingRadio" id="trainingRadio">
                     <label class="nameCharacteristic clickableLabel">Дрессировка</label>
                     <input readonly type="text" name="training" id="training" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Запугивание','intimidation');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Запугивание','forces');">
                     <input readonly type="radio" class="radioCharacteristic" name = "intimidationRadio" id="intimidationRadio">
                     <label class="nameCharacteristic clickableLabel">Запугивание</label>
                     <input readonly type="text" name="intimidation" id="intimidation" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Исполнение','execution');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Исполнение','charisma');">
                     <input readonly type="radio" class="radioCharacteristic" name = "executionRadio" id="executionRadio">
                     <label class="nameCharacteristic clickableLabel">Исполнение</label>
                     <input readonly type="text" name="execution" id="execution" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'История','history');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'История','wisdom');">
                     <input readonly type="radio" class="radioCharacteristic" name = "historyRadio" id="historyRadio">
                     <label class="nameCharacteristic clickableLabel">История</label>
                     <input readonly type="text" name="history" id="history" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Ловкость рук','sleight_hand');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Ловкость рук','dexterity');">
                     <input readonly type="radio" class="radioCharacteristic" name = "sleight_handRadio" id="sleight_handRadio">
                     <label class="nameCharacteristic clickableLabel">Ловкость рук</label>
                     <input readonly type="text" name="sleight_hand" id="sleight_hand" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Магия','magic');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Магия','intelligence');">
                     <input readonly type="radio" class="radioCharacteristic" name = "magicRadio" id="magicRadio">
                     <label class="nameCharacteristic clickableLabel">Магия</label>
                     <input readonly type="text" name="magic" id="magic" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Медецина','medicine');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Медецина','wisdom');">
                     <input readonly type="radio" class="radioCharacteristic" name = "medicineRadio" id="medicineRadio">
                     <label class="nameCharacteristic clickableLabel">Медецина</label>
                     <input readonly type="text" name="medicine" id="medicine" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Обман','deception');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Обман','charisma');">
                     <input readonly type="radio" class="radioCharacteristic" name = "deceptionRadio" id="deceptionRadio">
                     <label class="nameCharacteristic clickableLabel">Обман</label>
                     <input readonly type="text" name="deception" id="deception" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Природа','nature');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Природа','wisdom');">
                     <input readonly type="radio" class="radioCharacteristic" name = "natureRadio" id="natureRadio">
                     <label class="nameCharacteristic clickableLabel">Природа</label>
                     <input readonly type="text" name="nature" id="nature" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Проницательность','insight');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Проницательность','wisdom');">
                     <input readonly type="radio" class="radioCharacteristic" name = "insightRadio" id="insightRadio">
                     <label class="nameCharacteristic clickableLabel">Проницательность</label>
                     <input readonly type="text" name="insight" id="insight" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Расследование','investigation');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Расследование','intelligence');">
                     <input readonly type="radio" class="radioCharacteristic" name = "investigationRadio" id="investigationRadio">
                     <label class="nameCharacteristic clickableLabel">Расследование</label>
                     <input readonly type="text" name="investigation" id="investigation" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Религия','religion');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Религия','wisdom');">
                     <input readonly type="radio" class="radioCharacteristic" name = "religionRadio" id="religionRadio">
                     <label class="nameCharacteristic clickableLabel">Религия</label>
                     <input readonly type="text" name="religion" id="religion" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Скрытность','reserve');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Скрытность','dexterity');">
                     <input readonly type="radio" class="radioCharacteristic" name = "reserveRadio" id="reserveRadio">
                     <label class="nameCharacteristic clickableLabel">Скрытность</label>
                     <input readonly type="text" name="reserve" id="reserve" class="skillsElement clickableInput">
                 </div>
-                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Убеждение','belief');">
+                <div class="groupCharacteristic clickableDiv" onclick="OnChangedCube(20,'Убеждение','charisma');">
                     <input readonly type="radio" class="radioCharacteristic" name = "beliefRadio" id="beliefRadio">
                     <label class="nameCharacteristic clickableLabel">Убеждение</label>
                     <input readonly type="text" name="belief" id="belief" class="skillsElement clickableInput">
@@ -250,14 +250,9 @@
                 <div class="chengedHealthGroup">
                     <div class="chengedHealth">
                         <input type="text" name="addHealth" id="addHealth" class="chengedHealthInput">
-                        <input type="button" name="chengedHealthButton" id="addHealthButton"  class="chengedHealthButton" value="Лечение" 
+                        <input type="button" name="chengedHealthButton" id="addHealthButton"  class="chengedHealthButton" value="Изменить здоровье" 
                         onclick="ChengedHealth(addHealth.value,'Здоровье + ','health_current')">
                     </div>
-                    <!-- <div class="chengedHealth">
-                        <input type="text" name="reduceHealth" id="reduceHealth" class="chengedHealthInput">
-                        <input type="button" name="chengedHealthButton" id = "reduceHealthButton" class="chengedHealthButton" value="Урон" 
-                        onclick="ChengedHealth(addHealth.value, 'Здоровье - ','health_current', 'reduce')">                    
-                    </div> -->
                 </div>
             </div>
             <hr>
