@@ -1,14 +1,17 @@
 <?php
 //запрос на обновление данных в бд из js
 include_once "../workWithDB.php";
-function SetSelect($table, $nameColumn, $id, &$out): array
+function SetSelect($table, $nameColumn, $id, &$out)
 {
     $select = "SELECT * FROM pers WHERE id=?";
     $result = Select($select, "i", $id);
-    $resultArray = mysqli_fetch_array($result)["id_" . $table];
-    $valueCharacteristic = GetCharacteristic($table, $nameColumn, $resultArray);
-    $out["value"] = floor(($valueCharacteristic - 10) / 2);
-    return $out;
+    if ($table != "pers"):
+        $resultArray = mysqli_fetch_array($result)["id_" . $table];
+        $valueCharacteristic = GetCharacteristic($table, $nameColumn, $resultArray);
+        $out["value"] = floor(($valueCharacteristic - 10) / 2);
+    else:
+        $out["value"] = mysqli_fetch_array($result)[$nameColumn];
+    endif;
 }
 
 function GetCharacteristic($table, $name, $id)

@@ -35,18 +35,35 @@ function ClearInput(name) {
 }
 
 //бросок кубика
-async function OnChangedCube(cube, label = null, nameParametr = null) {
+async function OnChangedCube(cube, label = null, nameParametr = null, select = null) {
+    console.log("!");
     let input = document.getElementById("namePers");
     let value = Math.floor(Math.random() * cube);
     let result = value;
     let text = document.getElementById("textareaChat");
     text.value += input.value + " => ";
     if (nameParametr != null) {
-        let params = new URLSearchParams();
-        params.set("idPers", localStorage.getItem("idPers"));
-        params.set("nameColumn", nameParametr);
-        params.set("idSelect", "2");
-        const newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
+        let newValue;
+        switch (select)
+        {
+            case "spasbrosok": {
+                let input = document.getElementById(nameParametr + "Spasbrosok");
+                newValue = input.value * 1;
+                break;
+            }
+            case "skill":
+            case 'initiative':{
+                let input = document.getElementById(nameParametr);
+                newValue = input.value * 1;
+                break;
+            }
+            default: {
+                let input = document.getElementById(nameParametr);
+                newValue = Math.floor((input.value -10)/2);
+                break;
+            }
+        }
+
         text.value += label + ": \n\t" + value + " + (" + newValue + ") = ";
         result = value + newValue;
     }
@@ -72,6 +89,7 @@ async function ChengedHealth(value, label, nameColumn) {
     input = document.getElementById("namePers");
     let text = document.getElementById("textareaChat");
     text.value += input.value + " => " + label + value + " = " + newValue["value"] + "\n";
+    text.scrollBy(0, 30);
 }
 
 function KeyDown(e) {

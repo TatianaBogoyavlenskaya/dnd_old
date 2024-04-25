@@ -8,7 +8,7 @@ switch ($_POST["idSelect"]) {
         SetUpdate($_POST["nameColumn"],$_POST["idPers"], $_POST["value"],$out);
         break;
     case 2:
-        SetSelect("characteristics", $_POST["id"], $_POST["nameColumn"],$out);
+        SetSelect($_POST["table"], $_POST["nameColumn"],$_POST["idPers"], $out);
         break;
     case 3:
         GetListData($_POST["table"], $_POST["nameColumn"], $out, $_SESSION["login"]);
