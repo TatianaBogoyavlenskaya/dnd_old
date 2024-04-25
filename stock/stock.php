@@ -18,9 +18,6 @@
             <div class = "nameElementStock" id = "weightElement">Вес</div>
         </div>
         <hr>
-        <?php 
-            $id = (isset($_COOKIE["idPers"]))? $_COOKIE["idPers"] : $_SESSION["idPers"];
-            GetStock($id);
-        ?>
+        <script>GetEquipment();</script>
     </div>
 </div>

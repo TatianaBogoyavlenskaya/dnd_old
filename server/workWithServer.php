@@ -3,6 +3,8 @@
 session_start();
 include_once "select.php";
 include_once "updateSelect.php";
+include_once "../stock/stockFunction.php";
+
 switch ($_POST["idSelect"]) {
     case 1:
         SetUpdate($_POST["nameColumn"],$_POST["idPers"], $_POST["value"],$out);
@@ -25,6 +27,12 @@ switch ($_POST["idSelect"]) {
             $id = GetSelectPersData($_POST["idPers"], "id_" . $_POST["table"]);
         endif;
         GetDataPersForInput($_POST["table"],  $id, $out);
+        break;
+    case 6:
+        GetStock($_POST["idPers"],$_POST["isDressed"],$out);
+        break;
+    case 7:
+        $out = GetData($_POST["table"]);
         break;
     default:
         $out= array();

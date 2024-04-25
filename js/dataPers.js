@@ -2,9 +2,15 @@
 //Получить данные о персонаже
 function GetDataPers() {
     GetNamePers();
+    GetSelectList();
+    GetDataInput().then((value) => {
+        GetResultCharacteristic();
+        CalculeteSkillsAndSpasbrosoks();
+    });
 }
 
-async function GetNamePers(){
+//получение списка персонажей
+async function GetNamePers() {
     let params = new URLSearchParams();
     params.set("idSelect", "3");
     params.set("table", "pers");
@@ -13,9 +19,9 @@ async function GetNamePers(){
     const newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
     SetOption("namePerses", newValue["select"], newValue["value"]);
     SetInput("namePers", newValue["select"]);
-    GetSelectList();
 }
 
+//получение комбобоксов и их выбранных значений
 async function GetSelectList() {
     let params = new URLSearchParams();
     params.set("idSelect", "4");
@@ -28,9 +34,9 @@ async function GetSelectList() {
         const newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
         SetOption(arrTableSelect[index], newValue["select"], newValue["value"]);
     }
-    GetDataInput();
 }
 
+//получение основных данных
 async function GetDataInput() {
     let params = new URLSearchParams();
     params.set("idSelect", "5");
@@ -58,7 +64,5 @@ async function GetDataInput() {
     for (let index = 0; index < arrColumnCharacteristics.length; index++) {
         SetInput(arrColumnCharacteristics[index], newValue[arrColumnCharacteristics[index]]);
     }
-    GetResultCharacteristic();
-    CalculeteSkillsAndSpasbrosoks();
 }
 
