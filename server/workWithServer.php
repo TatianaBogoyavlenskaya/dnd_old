@@ -27,7 +27,7 @@ switch ($_POST["idSelect"]) {
         GetDataPersForInput($_POST["table"],  $id, $out);
         break;
     default:
+        $out= array();
         break;
 }
 echo json_encode($out);
-?>

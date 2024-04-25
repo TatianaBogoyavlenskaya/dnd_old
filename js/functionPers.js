@@ -2,7 +2,7 @@
 
 //выбор персонажа из подменю
 async function OnChangedPers(value) {
-    id = localStorage.getItem(value);
+    let id = localStorage.getItem(value);
     document.cookie = "idPers = " + id + "; path = /";
     localStorage.setItem('namePers', value);
     localStorage.setItem('idPers', id);
@@ -10,19 +10,19 @@ async function OnChangedPers(value) {
 }
 //Очистка формы для нового персонажа
 function ClearForm() {
-    arrType = ["namePers", "level", "passive_attention", "bonus", "initiative", "class_armor", "speed", "health_max", "health_current", "health_bones",
+    let arrType = ["namePers", "level", "passive_attention", "bonus", "initiative", "class_armor", "speed", "health_max", "health_current", "health_bones",
         "forces", "dexterity", "endurance", "intelligence", "wisdom", "charisma",
         "forcesResult", "dexterityResult", "enduranceResult", "intelligenceResult", "wisdomResult", "charismaResult",
         "forcesSpasbrosok", "dexteritySpasbrosok", "enduranceSpasbrosok", "intelligenceSpasbrosok", "wisdomSpasbrosok", "charismaSpasbrosok",
         "acrobatics", "athletics", "attention", "survival", "training", "intimidation", "execution", "history", "sleight_hand", "magic", "medicine", "deception",
         "nature", "insight", "investigation", "religion", "reserve", "belief", "experience", "health_temporarily", "health_bones_curent"];
-    for (index = 0; index < arrType.length; index++) {
+    for (let index = 0; index < arrType.length; index++) {
         ClearInput(arrType[index]);
     }
-    arrRadio = ["tests_death_success", "tests_death_failure"];
-    for (index = 0; index < arrRadio.length; index++) {
-        for (setValue = 1; setValue <= 3; setValue++) {
-            var radio = document.getElementById(arrRadio[index] + setValue);
+    let arrRadio = ["tests_death_success", "tests_death_failure"];
+    for (let index = 0; index < arrRadio.length; index++) {
+        for (let setValue = 1; setValue <= 3; setValue++) {
+            let radio = document.getElementById(arrRadio[index] + setValue);
             radio.checked = false;
         }
     }
@@ -30,22 +30,22 @@ function ClearForm() {
 
 //Очистка инпутов
 function ClearInput(name) {
-    var inputName = document.getElementById(name);
+    let inputName = document.getElementById(name);
     inputName.value = null;
 }
 
 //бросок кубика
 async function OnChangedCube(cube, label = null, nameParametr = null) {
-    var input = document.getElementById("namePers");
-    value = Math.floor(Math.random() * cube);
-    result = value;
-    var text = document.getElementById("textareaChat");
+    let input = document.getElementById("namePers");
+    let value = Math.floor(Math.random() * cube);
+    let result = value;
+    let text = document.getElementById("textareaChat");
     text.value += input.value + " => ";
     if (nameParametr != null) {
-        params = new URLSearchParams();
+        let params = new URLSearchParams();
         params.set("idPers", localStorage.getItem("idPers"));
         params.set("nameColumn", nameParametr);
-        params.set("idSelect", 2);
+        params.set("idSelect", "2");
         const newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
         text.value += label + ": \n\t" + value + " + (" + newValue + ") = ";
         result = value + newValue;
@@ -53,6 +53,7 @@ async function OnChangedCube(cube, label = null, nameParametr = null) {
     else {
         text.value += "d" + cube + " = ";
     }
+    //TODO: При спасбросках вылетает, проверить работу с бд, поля для запросов и т.д.
     text.value += result + "\n";
     text.scrollBy(0, 30);
 }
@@ -60,16 +61,16 @@ async function OnChangedCube(cube, label = null, nameParametr = null) {
 //действия над здоровьем
 async function ChengedHealth(value, label, nameColumn) {
     if (value == 0) return;
-    var input = document.getElementById(nameColumn);
-    params = new URLSearchParams();
-    params.set("idSelect", 1);
+    let input = document.getElementById(nameColumn);
+    let params = new URLSearchParams();
+    params.set("idSelect", "1");
     params.set("idPers",  localStorage.getItem('idPers'));
     params.set("nameColumn", nameColumn);
     params.set("value", value);
     const newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
     input.value = newValue["value"];
-    var input = document.getElementById("namePers");
-    var text = document.getElementById("textareaChat");
+    input = document.getElementById("namePers");
+    let text = document.getElementById("textareaChat");
     text.value += input.value + " => " + label + value + " = " + newValue["value"] + "\n";
 }
 
@@ -99,17 +100,16 @@ function GetStock() {
 
 //получение количества денег
 function GetDataMoney() {
-    arrMoney = ["platinum", "gold", "silver", "bronze"];
-    for (index = 0; index < arrMoney.length; index++) {
+    let  arrMoney = ["platinum", "gold", "silver", "bronze"];
+    for (let index = 0; index < arrMoney.length; index++) {
         SetInput(arrMoney[index]);
     }
 }
 //вывод веса в инвентаре
 function GetDataWaight() {
-    arrWaight = ["curentWeight", "maxWeight"];
-    maxWeight = localStorage.getItem("forces") * 10; //TODO: поставить правильную формулу расчета
-    localStorage.setItem('maxWeight', maxWeight);
-    for (index = 0; index < arrWaight.length; index++) {
+    let arrWaight = ["curentWeight", "maxWeight"];
+    localStorage.setItem('maxWeight', localStorage.getItem("forces") * 10);//TODO: поставить правильную формулу расчета
+    for (let index = 0; index < arrWaight.length; index++) {
         SetInput(arrWaight[index]);
     }
 }

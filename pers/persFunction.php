@@ -3,8 +3,9 @@
     
     //Получение списка персонажей игрока    
     function GetPers()
-    {        
-        $select = "SELECT * FROM pers WHERE loginUser = ?";
+    {
+        $table ="pers";
+        $select = "SELECT * FROM $table WHERE loginUser = ?";
         $result = Select($select, "s", $_SESSION["login"]);
         $_SESSION["pers"] = $result;
         foreach ($result as $value):
@@ -22,19 +23,9 @@
         return $result;
     }   
 
-    //получение значений списков
-    function GetSelects()
-    {
-        $arrTable = ["race", "class_pers", "outlook","type_subject"];
-        $arrColumne = ["nameRace", "nameClass", "nameOutlook","type"];
-        $arrLocalStorage = ["allRace", "allClass", "allOutlook","allTypeSubject"];
-        for($index =0; $index < count($arrTable); $index++):
-            GetDataSelects($arrTable[$index], $arrColumne[$index], $arrLocalStorage[$index]);
-        endfor;
-    }
 
     //Получение характеристик
-    function GetCharacteristics()
+    function GetCharacteristics():void
     {
         $arrCharacteristic = ["characteristics", "skills", "spasbrosok"];
         $arrLocalStorageAdd = ["", "Radio", "SpasbrosokRadio"];
@@ -44,7 +35,7 @@
     }
 
     //Получение данных персонажей игрока    
-    function GetDataPers($getValue)
+    function GetDataPers($getValue):void
     {
         $_SESSION["pers"] = $getValue;
         foreach ($_SESSION["pers"] as $value):
@@ -71,7 +62,7 @@
     /* Приватные функции*/
 
     //получение данных о персонаже
-    function GenerateSelectAllData($table, $nameLocalStorageAdd)
+    function GenerateSelectAllData($table, $nameLocalStorageAdd):void
     {
         foreach($_SESSION["pers"] as $key => $value):
             foreach($value as $key => $id):
@@ -90,34 +81,9 @@
             endforeach;
         endforeach;
     }
-    
-    //Формирование запроса связанных таблиц со списками (рассы/классы и т.д.), получение данных  и их засовывание в localStorage
-    function GetDataSelects($table, $column, $localStorage)
-    {
-        if (isset($_SESSION[$table])):
-            unset($_SESSION[$table]);
-        endif;
-        $select = "SELECT * FROM $table";
-        $result = Select($select);
-        foreach($result as $data):
-            $_SESSION[$table][] = $data;
-        endforeach;
-        $allClass = SelectFromArray($result, $column);
-        $allClassJson = json_encode(json_encode($allClass));
-        echo "<script> localStorage.setItem('$localStorage', $allClassJson);</script>";
-        return $result;
-    }
-
-    //Формирование массива из запроса
-    function SelectFromArray($result, $column, &$out = null)
-    {
-        foreach ($result as $value) {
-            $out["value"][] = $value[$column];
-        }
-    }
 
     //Сохранение данных о персонаже в localStorage
-    function SetDataPersInScript($value)
+    function SetDataPersInScript($value):void
     {
         $arrType = ["namePers", "level", "bonus", "initiative", "class_armor", "speed", "health_max", "health_current", "health_bones","health_bones_curent",
         "tests_death_success", "tests_death_failure", "experience", "inspiration", "health_temporarily"];
@@ -136,7 +102,7 @@
     }
 
     //Положить данные в localStorage
-    function SetInLocalStorage($name, $value)
+    function SetInLocalStorage($name, $value):void
     {
         if (!isset($value)):
             return;
@@ -145,7 +111,7 @@
     }
 
     //Получить данные запроса и положить в localStorage
-    function GetSelect($name, $nameSelect, $allSelect, $select)
+    function GetSelect($name, $nameSelect, $allSelect, $select):void
     {
         foreach ($allSelect as $value): 
             if ($value["id"] == $select):
@@ -166,10 +132,12 @@
             if ($value["id"] != $_SESSION["idPers"]):
                 continue;
             endif;
-            $select = "SELECT id_class_pers FROM pers WHERE id = ?";
+            $tablePers ="pers";
+            $tableClass_pers="class_pers";
+            $select = "SELECT id_class_pers FROM $tablePers WHERE id = ?";
             $result = Select($select, "s",$value["id"]);
             $class = mysqli_fetch_array($result)["id_class_pers"];
-            $select = "SELECT nameClass FROM class_pers WHERE id = ?";
+            $select = "SELECT nameClass FROM $tableClass_pers WHERE id = ?";
             $result = Select($select, "s",$class);
             $keyResult = mysqli_fetch_array($result);
             if (!isset($keyResult["nameClass"])):
@@ -182,23 +150,17 @@
         return TypePers::weapon;
     }
 
-    //Вывод заклинаний
-    function WriteSpells()
-    {
-        for ($index = 0; $index < 10; $index++):
-           $arr = GetSpells($index);
-        endfor;
-    }
-
-    //Получение заклинаний 
+    //Получение заклинаний
     function GetSpells($level):array
     {
-        $select = "SELECT * FROM spellsOfPers WHERE idPers=?";
+        $spellsOfPers = "spellsOfPers";
+        $spells = "spells";
+        $select = "SELECT * FROM $spellsOfPers WHERE idPers=?";
         $result = Select($select,"i", $_SESSION["idPers"]);
         $idSpells = mysqli_fetch_array($result)["id_spells"];
         $arrSpells= array();
         foreach($idSpells as $id):
-            $select = "SELECT * FROM spells WHERE id=?";
+            $select = "SELECT * FROM $spells WHERE id=?";
             $result = Select($select,"i", $id);
             $spells = mysqli_fetch_array($result);
             if ($spells["level"] != $level):
@@ -208,5 +170,3 @@
         endforeach;
         return $arrSpells;
     }
-
-?>

@@ -6,4 +6,3 @@
     endif;
     include_once "userFunction.php";
     Autorization($_POST["login"], $_POST["password"]);
-?>

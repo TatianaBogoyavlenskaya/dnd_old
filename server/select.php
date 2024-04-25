@@ -18,7 +18,7 @@ function GetCharacteristic($table, $name, $id)
     return mysqli_fetch_array($result)[$name];
 }
 
-function GetListData($table, $column, &$out, $login = null)
+function GetListData($table, $column, &$out, $login = null):void
 {
     if ($login != null):
         $select = "SELECT * FROM $table WHERE loginUser =?";
@@ -41,7 +41,7 @@ function GetSelectPersData($id, $column)
 }
 
 //Получение данных для комбобоксов
-function GetSelectData($table, $column, $id, &$out)
+function GetSelectData($table, $column, $id, &$out):void
 {
     $select = "SELECT * FROM $table WHERE id =?";
     $result = Select($select, "i", $id);
@@ -56,7 +56,6 @@ function GetDataPersForInput($table, $id, &$out): void
     $value = mysqli_fetch_array($result);
     foreach ($value as $key => $textColumn):
         $out[$key] = $textColumn;
-    endforeach;;
+    endforeach;
 }
 
-?>

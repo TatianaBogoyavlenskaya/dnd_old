@@ -1,9 +1,10 @@
 <?php 
     //запрос в бд данных из js
     include_once "../workWithDB.php";
-    function SetUpdate($nameColumn,$id,$value,&$out)
+    function SetUpdate($nameColumn,$id,$value,&$out):void
     {
-        $select = "SELECT * FROM pers WHERE id=?";
+        $table = "pers";
+        $select = "SELECT * FROM $table WHERE id=?";
         $result = Select($select,"i", $id);
         $resultArray = mysqli_fetch_array($result)[$nameColumn];
         $getData = $resultArray+$value;
@@ -11,4 +12,3 @@
         Select($select,"ii", $getData,$id);
         $out["value"] = $getData;
     }
-?>

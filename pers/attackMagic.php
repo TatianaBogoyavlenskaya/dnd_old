@@ -4,8 +4,8 @@
     <div class="preparedSpells">
         <div class="column1">
             <label class="namePreparedSpells">1 уровень</label>
-            <input type="text" name="countPreparedSpellsLevel1" id="countPreparedSpellsLevel1" class="countPreparedSpells">
-            <input type="text" name="curentCountPreparedSpellsLevel1" id="curentCountPreparedSpellsLevel1" class="countPreparedSpells">
+            <label for="countPreparedSpellsLevel1"></label><input type="text" name="countPreparedSpellsLevel1" id="countPreparedSpellsLevel1" class="countPreparedSpells">
+            <label for="curentCountPreparedSpellsLevel1"></label><input type="text" name="curentCountPreparedSpellsLevel1" id="curentCountPreparedSpellsLevel1" class="countPreparedSpells">
             <div class="spellsLevel">
                 <label class="spells">Огненый шар</label>
                 <img class ="picture" src="../icon/ask.png" alt="Описание" title="Описание заклинания">

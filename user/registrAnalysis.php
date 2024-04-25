@@ -12,4 +12,3 @@
 
     include_once "userFunction.php";
     AddUser($_POST["login"],$_POST["name"],$_POST["password"]);
-?>

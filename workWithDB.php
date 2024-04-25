@@ -34,9 +34,8 @@
             $query->bind_param($type, ...$value);
         endif;
         $result = $query->execute();
-        if ($res == true):
+        if ($res):
             return $result;
         endif;
         return $query->get_result();
     }
-?>
