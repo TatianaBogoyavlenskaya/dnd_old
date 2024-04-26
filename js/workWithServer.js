@@ -1,5 +1,5 @@
 //отправка данных на сервер
-async function SendServer(addres, params) {
+export async function SendServer(addres, params) {
     return await fetch(addres, {
         method: "POST",
         body: params

@@ -6,8 +6,8 @@
     <title></title>
 </head>
 <body>
-    <div class="year">
-        Год разработки: 2024
-    </div>
+<div class="year">
+    Год разработки: 2024
+</div>
 </body>
 </html>

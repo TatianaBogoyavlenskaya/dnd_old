@@ -1,32 +1,5 @@
 // Функции заполнения листа персонажа
-
-function SetOption(select, checked, value) {
-    let selectName = document.getElementById(select);
-    for (let indexElement = 0; indexElement < value.length; indexElement++) {
-        let ob = document.createElement('Option');
-        ob.setAttribute('value', value[indexElement]);
-        ob.appendChild(document.createTextNode(value[indexElement]));
-        selectName.appendChild(ob);
-    }
-    selectName.value = checked;
-}
-
-//Установка данных в текстовые поля input
-function SetInput(id, text) {
-    let input = document.getElementById(id);
-    input.value = text;
-}
-
-//Расчет и установка значений модификаторов характеристик
-function GetResultCharacteristic() {
-    let arrType = ["forces", "dexterity", "endurance", "intelligence", "wisdom", "charisma"];
-    for (let indexElementCharacteristic = 0; indexElementCharacteristic < arrType.length; indexElementCharacteristic++) {
-        let getElement = document.getElementById(arrType[indexElementCharacteristic]);
-        let setElement = document.getElementById(arrType[indexElementCharacteristic] + "Result");
-        setElement.value = Math.floor((getElement.value - 10) / 2);
-    }
-}
-
+import {SendServer} from "./workWithServer.js";
 //основные характеристики
 const ESkillType = {
     forces: 'forces',
@@ -46,15 +19,44 @@ class Skill {
     }
 }
 
+export function SetOption(select, checked, value) {
+    let selectName = document.getElementById(select);
+    for (let indexElement = 0; indexElement < value.length; indexElement++) {
+        let ob = document.createElement('Option');
+        ob.setAttribute('value', value[indexElement]);
+        ob.appendChild(document.createTextNode(value[indexElement]));
+        selectName.appendChild(ob);
+    }
+    selectName.value = checked;
+}
+
+//Установка данных в текстовые поля input
+export function SetInput(id, text) {
+    let input = document.getElementById(id);
+    if (input != null) {
+        input.value = text;
+    }
+}
+
+//Расчет и установка значений модификаторов характеристик
+export function GetResultCharacteristic() {
+    let arrType = ["forces", "dexterity", "endurance", "intelligence", "wisdom", "charisma"];
+    for (let indexElementCharacteristic = 0; indexElementCharacteristic < arrType.length; indexElementCharacteristic++) {
+        let getElement = document.getElementById(arrType[indexElementCharacteristic]);
+        let setElement = document.getElementById(arrType[indexElementCharacteristic] + "Result");
+        setElement.value = Math.floor((getElement.value - 10) / 2);
+    }
+}
+
 //Расчет характеристик
-async function CalculeteSkillsAndSpasbrosoks() {
+export async function CalculeteSkillsAndSpasbrosoks() {
     let arrSkills = [
         new Skill(ESkillType.forces, "forces", "forcesSpasbrosok"),
-        new Skill(ESkillType.dexterity, "dexterity", "dexteritySpasbrosok"),
-        new Skill(ESkillType.endurance, "endurance", "enduranceSpasbrosok"),
-        new Skill(ESkillType.intelligence, "intelligence", "intelligenceSpasbrosok"),
-        new Skill(ESkillType.wisdom, "wisdom", "wisdomSpasbrosok"),
-        new Skill(ESkillType.charisma, "charisma", "charismaSpasbrosok")
+            new Skill(ESkillType.dexterity, "dexterity", "dexteritySpasbrosok"),
+            new Skill(ESkillType.endurance, "endurance", "enduranceSpasbrosok"),
+            new Skill(ESkillType.intelligence, "intelligence", "intelligenceSpasbrosok"),
+            new Skill(ESkillType.wisdom, "wisdom", "wisdomSpasbrosok"),
+            new Skill(ESkillType.charisma, "charisma", "charismaSpasbrosok")
     ];
     let arrSkills2 = [
         new Skill(ESkillType.dexterity, "acrobatics", "acrobatics"),
@@ -88,7 +90,7 @@ async function CalculeteSkillsAndSpasbrosoks() {
 
     for (let indexSkills = 0; indexSkills < arrSkills.length; indexSkills++) {
         let radio = document.getElementById(arrSkills[indexSkills].Tag + "Radio");
-        radio.checked = (newValue[arrSkills[indexSkills].Name] == 1) ? true : false;
+        radio.checked = newValue[arrSkills[indexSkills].Name] === 1;
         let input = document.getElementById(arrSkills[indexSkills].Type);
         resultValue = Math.floor((input.value - 10) / 2);
         if (radio.checked) {
@@ -100,7 +102,7 @@ async function CalculeteSkillsAndSpasbrosoks() {
     newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
     for (let indexSkills = 0; indexSkills < arrSkills2.length; indexSkills++) {
         let radio = document.getElementById(arrSkills2[indexSkills].Tag + "Radio");
-        radio.checked = (newValue[arrSkills2[indexSkills].Name] == 1) ? true : false;
+        radio.checked = newValue[arrSkills2[indexSkills].Name] === 1;
         let input = document.getElementById(arrSkills2[indexSkills].Type);
         resultValue = Math.floor((input.value - 10) / 2);
         if (radio.checked) {

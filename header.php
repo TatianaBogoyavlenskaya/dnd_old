@@ -6,6 +6,6 @@
     <title></title>
 </head>
 <body>
-    <div class="logo"></div>
+<div class="logo"></div>
 </body>
 </html>

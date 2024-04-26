@@ -1,16 +1,31 @@
 // Заполнение данными листа персонажа
-//Получить данные о персонаже
-function GetDataPers() {
+GetDataPers();
+import {SendServer} from "./workWithServer.js";
+import {CalculeteSkillsAndSpasbrosoks, GetResultCharacteristic, SetInput, SetOption} from "./functionSetDataPers.js";
+
+async function CommuneWithServer(){
     GetNamePers();
     GetSelectList();
-    GetDataInput().then((value) => {
-        GetResultCharacteristic();
-        CalculeteSkillsAndSpasbrosoks();
-    });
+    GetDataInput();
+    //TODO: поработать над обращением к БД
+}
+//Получить данные о персонаже
+ function GetDataPers() {
+     console.log("poip");
+     GetNamePers();
+     GetSelectList();
+     GetDataInput().then((value) => {
+         GetResultCharacteristic();
+         CalculeteSkillsAndSpasbrosoks();
+     });
+    //CommuneWithServer().then((_) => {
+      //  GetResultCharacteristic();
+       // CalculeteSkillsAndSpasbrosoks();
+   // })
 }
 
 //получение списка персонажей
-async function GetNamePers() {
+ async function GetNamePers() {
     let params = new URLSearchParams();
     params.set("idSelect", "3");
     params.set("table", "pers");
@@ -19,10 +34,11 @@ async function GetNamePers() {
     const newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
     SetOption("namePerses", newValue["select"], newValue["value"]);
     SetInput("namePers", newValue["select"]);
+    localStorage.setItem('namePers', newValue["select"]);
 }
 
 //получение комбобоксов и их выбранных значений
-async function GetSelectList() {
+ async function GetSelectList() {
     let params = new URLSearchParams();
     params.set("idSelect", "4");
     params.set("idPers", localStorage.getItem('idPers'));
@@ -37,7 +53,7 @@ async function GetSelectList() {
 }
 
 //получение основных данных
-async function GetDataInput() {
+ async function GetDataInput() {
     let params = new URLSearchParams();
     params.set("idSelect", "5");
     params.set("idPers", localStorage.getItem('idPers'));

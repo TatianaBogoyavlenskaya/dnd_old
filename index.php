@@ -9,7 +9,7 @@
     <title>Авторизация</title>
 </head>
 <body>
-<?php include_once "header.php";?>
+<?php include_once "header.php"; ?>
 <form method="post">
     <label>
         Логин
@@ -21,12 +21,17 @@
     </label>
     <a href="user/registr.php">Зарегистрироваться</a>
     <input type="submit" value="Войти">
-</form>   
+</form>
+<?php include_once "footer.php"; ?>
 </body>
 </html>
-<?php 
-    session_start();
-    include_once "workWithDB.php";
-    include_once "user/autorizationAnalysis.php";
-    include_once "footer.php";
+<?php
+session_start();
+include_once "workWithDB.php";
+if (!isset($_POST["login"]) || !isset($_POST["password"])):
+    echo "<p>*Введите данные для входа</p>";
+    return;
+endif;
+include_once "user/userFunction.php";
+Autorization($_POST["login"], $_POST["password"]);
 ?>

@@ -1,15 +1,17 @@
 // Обработчики событий листа перонажа
+import {SendServer} from "./workWithServer.js";
 
 //выбор персонажа из подменю
-async function OnChangedPers(value) {
+export async function OnChangedPers(value) {
     let id = localStorage.getItem(value);
     document.cookie = "idPers = " + id + "; path = /";
     localStorage.setItem('namePers', value);
     localStorage.setItem('idPers', id);
     location.reload();
 }
+
 //Очистка формы для нового персонажа
-function ClearForm() {
+export function ClearForm() {
     let arrType = ["namePers", "level", "passive_attention", "bonus", "initiative", "class_armor", "speed", "health_max", "health_current", "health_bones",
         "forces", "dexterity", "endurance", "intelligence", "wisdom", "charisma",
         "forcesResult", "dexterityResult", "enduranceResult", "intelligenceResult", "wisdomResult", "charismaResult",
@@ -35,38 +37,40 @@ function ClearInput(name) {
 }
 
 //бросок кубика
-async function OnChangedCube(cube, label = null, nameParametr = null, select = null) {
-    let input = document.getElementById("namePers");
-    let value = Math.floor(Math.random() * cube);
+export async function OnChangedCube(cube, label = null, nameParametr = null, select = null) {
+    let input = localStorage.getItem("namePers");
+    let random = Math.floor((Math.random()) * cube);
+    while (random === 0) {
+        random = Math.floor((Math.random()) * cube);
+    }
+    let value = random;
     let result = value;
     let text = document.getElementById("textareaChat");
-    text.value += input.value + " => ";
+    text.value += input + " => ";
     if (nameParametr != null) {
         let newValue;
-        switch (select)
-        {
+        switch (select) {
             case "spasbrosok": {
                 let input = document.getElementById(nameParametr + "Spasbrosok");
                 newValue = input.value * 1;
                 break;
             }
             case "skill":
-            case 'initiative':{
+            case 'initiative': {
                 let input = document.getElementById(nameParametr);
                 newValue = input.value * 1;
                 break;
             }
             default: {
                 let input = document.getElementById(nameParametr);
-                newValue = Math.floor((input.value -10)/2);
+                newValue = Math.floor((input.value - 10) / 2);
                 break;
             }
         }
 
         text.value += label + ": \n\t" + value + " + (" + newValue + ") = ";
         result = value + newValue;
-    }
-    else {
+    } else {
         text.value += "d" + cube + " = ";
     }
     text.value += result + "\n";
@@ -74,12 +78,12 @@ async function OnChangedCube(cube, label = null, nameParametr = null, select = n
 }
 
 //действия над здоровьем
-async function ChengedHealth(value, label, nameColumn) {
-    if (value == 0) return;
+export async function ChengedHealth(value, label, nameColumn) {
+    if (value === 0) return;
     let input = document.getElementById(nameColumn);
     let params = new URLSearchParams();
     params.set("idSelect", "1");
-    params.set("idPers",  localStorage.getItem('idPers'));
+    params.set("idPers", localStorage.getItem('idPers'));
     params.set("nameColumn", nameColumn);
     params.set("value", value);
     const newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
@@ -90,32 +94,34 @@ async function ChengedHealth(value, label, nameColumn) {
     text.scrollBy(0, 30);
 }
 
-function KeyDown(e) {
+export function KeyDown(e) {
     // console.log(e.code);
     //TODO: сделать проверку нажатой клавишы
 }
 
-function OpenStock() {
+export  function OpenStock() {
     location.assign("../stock/stockPers.php");
     // Открыть в новой вкладке
 }
-function OpenListPers() {
+
+export function OpenListPers() {
     location.assign("../pers/pers.php");
 }
 
 //получение инвентаря
-function GetStock() {
+export function GetStock() {
     GetDataMoney();
     GetDataWaight();
 }
 
 //получение количества денег
 function GetDataMoney() {
-    let  arrMoney = ["platinum", "gold", "silver", "bronze"];
+    let arrMoney = ["platinum", "gold", "silver", "bronze"];
     for (let index = 0; index < arrMoney.length; index++) {
         SetInput(arrMoney[index]);
     }
 }
+
 //вывод веса в инвентаре
 function GetDataWaight() {
     let arrWaight = ["curentWeight", "maxWeight"];
@@ -124,39 +130,49 @@ function GetDataWaight() {
         SetInput(arrWaight[index]);
     }
 }
+
 //вывод описания предмета
 async function GetDiscriptionSubject(id) {
     //await CreateSelect(null, nameColumn, null, type, label, "updateSelect", input.value);
 }
 
-async function GetMoney(){
+//Получение денег персонажа
+async function GetMoney() {
     let params = new URLSearchParams();
     params.set("idSelect", "7");
     params.set("idPers", localStorage.getItem('idPers'));
-    params.set("table","money");
+    params.set("table", "money");
     const newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
-    let money =["platinum", "gold", "silver", "bronze"];
+    let money = ["platinum", "gold", "silver", "bronze"];
     for (let index = 0; index < money.length; index++) {
-        SetInput(money[index],newValue[money[index]]);
+        SetInput(money[index], newValue[money[index]]);
     }
 }
 
-async function GetEquipment(isDressed = false){
+//получить предметы в инвентаре и то, что одето
+async function GetEquipment(isDressed = false) {
     let params = new URLSearchParams();
     params.set("idSelect", "6");
     params.set("idPers", localStorage.getItem('idPers'));
     params.set("isDressed", isDressed);
     await SendServer("http://localhost/DND/server/workWithServer.php", params);
     const newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
-    SetInput("curentWeight",newValue["curentWeight"]);
-    // document.write(newValue["value"]);
-    if (!isDressed)
-    {
-    params.set("idSelect", "5");
-    params.set("table", "characteristics");
-    let newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
-    let forces = newValue["forces"];
-    let maxWeight = 100+Math.floor((forces-10)/2)*10;
-    SetInput("maxWeight",maxWeight);
+    SetInput("curentWeight", newValue["curentWeight"]);
+    console.log(newValue["select"]);
+    let div;
+    if (isDressed) {
+        div = document.getElementById("equipmentDressed");
+    } else {
+        div = document.getElementById("stockElement");
+    }
+    div.innerHTML = newValue["value"];
+
+    if (!isDressed) {
+        params.set("idSelect", "5");
+        params.set("table", "characteristics");
+        let newValue = await SendServer("http://localhost/DND/server/workWithServer.php", params);
+        let forces = newValue["forces"];
+        let maxWeight = 100 + Math.floor((forces - 10) / 2) * 10;
+        SetInput("maxWeight", maxWeight);
     }
 }
