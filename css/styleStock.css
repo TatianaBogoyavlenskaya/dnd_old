@@ -80,4 +80,6 @@
     background-repeat: no-repeat;
     background-size: contain;
     float: right;
+    vertical-align: middle;
+   
 }
